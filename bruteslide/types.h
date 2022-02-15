@@ -1,5 +1,10 @@
-struct Surface
-{
+#ifndef TYPES_H
+#define TYPES_H
+
+struct Surface {
+    int Vertex1[3];
+    int Vertex2[3];
+    int Vertex3[3];
     struct {
         float x;
         float y;
@@ -19,3 +24,5 @@ struct MarioState {
     struct Surface* floor;
     int faceAngle[3];
 };
+
+#endif

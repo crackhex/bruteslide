@@ -1,9 +1,7 @@
-// bruteslide.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// bruteslide.c : This file contains the 'main' function. Program execution begins and ends there.
 //
-
-#include <iostream>
 #include "types.h"
-
+#include "trig_table.inc.c"
 void update_sliding_angle(struct MarioState* m, float accel, float lossFactor) {
     int newFacingDYaw;
     int facingDYaw;
@@ -63,27 +61,10 @@ int update_sliding(struct MarioState* m, float stopSpeed) {
         forward *= 0.5 + 0.5 * m->forwardVel / 100.0;
     }
 
-    /*switch (mario_get_floor_class(m)) {
-    case SURFACE_CLASS_VERY_SLIPPERY:
-        accel = 10.0f;
-        lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.98f;
-        break;
 
-    case SURFACE_CLASS_SLIPPERY:
-        accel = 8.0f;
-        lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.96f;
-        break;
+    accel = 7.0f;
+    lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.92f;
 
-    default:
-        accel = 7.0f;
-        lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.92f;
-        break;
-
-    case SURFACE_CLASS_NOT_SLIPPERY:
-        accel = 5.0f;
-        lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.92f;
-        break;
-    } */
 
     oldSpeed = sqrt(m->slideVelX * m->slideVelX + m->slideVelZ * m->slideVelZ);
 
@@ -115,17 +96,14 @@ int main()
     int p1[3] = { 6144, 1024, 6144 };
     int p2[3] = { 7168, 2458, 8192 };
     int p3[3] = { 6144, 1024, -1535 };
+    struct MarioState* ns;
+    struct Surface* tri = ns->floor;
+    tri->Vertex1[0] = p1[0]; tri->Vertex1[1] = p1[1]; tri->Vertex1[2] = p1[2];
+    tri->Vertex2[0] = p2[0]; tri->Vertex2[1] = p2[1]; tri->Vertex2[2] = p2[2];
+    tri->Vertex3[0] = p3[0]; tri->Vertex3[1] = p3[1]; tri->Vertex3[2] = p3[2];
+    
+    ns->mPos[0] = 3;
 
-    std::cout << "Hello World!\n";
+    if (
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
