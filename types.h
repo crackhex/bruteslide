@@ -44,6 +44,8 @@ struct MarioState {
     f32 slideVelZ;
     struct Surface* floor;
     s16 faceAngle[3];
+    f32 pos[3];
+    f32 vel[3];
 };
 struct Input {
     s16 x;
