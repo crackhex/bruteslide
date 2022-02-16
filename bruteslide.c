@@ -82,10 +82,6 @@ int update_sliding(struct MarioState* m, float stopSpeed) {
 
     update_sliding_angle(m, accel, lossFactor);
 
-    if (!mario_floor_is_slope(m) && m->forwardVel * m->forwardVel < stopSpeed * stopSpeed) {
-        mario_set_forward_vel(m, 0.0f);
-        stopped = 1;
-    }
 
     return stopped;
 }

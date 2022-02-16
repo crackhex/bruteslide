@@ -1,32 +1,52 @@
-//
-// Created by Austin Troike on 2/15/22.
-//
-
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <stddef.h>
+#include <stdint.h>
+
+typedef signed char            s8;
+typedef unsigned char          u8;
+typedef signed short int       s16;
+typedef unsigned short int     u16;
+typedef signed int             s32;
+typedef unsigned int           u32;
+typedef int64_t s64;
+typedef uint64_t u64;
+
+typedef float  f32;
+typedef double f64;
+
 struct Surface {
-    int Vertex1[3];
-    int Vertex2[3];
-    int Vertex3[3];
-    struct {
-        float x;
-        float y;
-        float z;
+    /*0x00*/ s16 type;
+    /*0x02*/ s16 force;
+    /*0x04*/ s8 flags;
+    /*0x05*/ s8 room;
+    /*0x06*/ s16 lowerY;
+    /*0x08*/ s16 upperY;
+    /*0x0A*/ s16 vertex1[3];
+    /*0x10*/ s16 vertex2[3];
+    /*0x16*/ s16 vertex3[3];
+    /*0x1C*/ struct {
+        f32 x;
+        f32 y;
+        f32 z;
     } normal;
-    /*0x28*/ float originOffset;
-    /*0x2C*/ struct Object* object;
+    /*0x28*/ f32 originOffset;
+    /*0x2C*/ struct Object *object;
 };
 struct MarioState {
-    float mPos[3];
-    int intendedYaw;
-    int slideYaw;
-    float forwardVel;
-    float intendedMag;
-    float slideVelX;
-    float slideVelZ;
+    f32 mPos[3];
+    s16 intendedYaw;
+    s16 slideYaw;
+    f32 forwardVel;
+    f32 intendedMag;
+    f32 slideVelX;
+    f32 slideVelZ;
     struct Surface* floor;
-    int faceAngle[3];
+    s16 faceAngle[3];
 };
-
+struct Input {
+    s16 x;
+    s16 y;
+};
 #endif //TYPES_H
