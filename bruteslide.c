@@ -1,6 +1,14 @@
 #include "types.h"
 #include "trig_table.inc.c"
+#include <math.h>
+#include <stdio.h>
 
+__constant__ f32 dev_sin_table[5120];
+__constant__ s16 dev_arctan_table[1025];
+
+#define dev_cos_table (dev_sin_table + 0x400)
+#define sins(x) dev_sin_table[(u16) (x) >> 4]
+#define coss(x) dev_cos_table[(u16) (x) >> 4]
 void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     s32 newFacingDYaw;
     s16 facingDYaw;

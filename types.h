@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#define TRUE 1
+#define FALSE 0
 typedef signed char            s8;
 typedef unsigned char          u8;
 typedef signed short int       s16;
@@ -15,6 +17,18 @@ typedef uint64_t u64;
 
 typedef float  f32;
 typedef double f64;
+
+extern f32 gSineTable[];
+#ifdef AVOID_UB
+#else
+extern f32 gCosineTable[];
+#endif
+
+
+#define sins(x) gSineTable[(u16) (x) >> 4]
+#define coss(x) gCosineTable[(u16) (x) >> 4]
+
+f32 atan2f(f32 a, f32 b);
 
 struct Surface {
     /*0x00*/ s16 type;
