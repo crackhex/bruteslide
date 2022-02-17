@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "bruteslide.c"
+#include "types.h"
+//#include "bruteslide.c"
 
 int main() {
     int p1[3] = { 6144, 1024, 6144 };
@@ -12,4 +13,5 @@ int main() {
     tri->vertex3[0] = p3[0]; tri->vertex3[1] = p3[1]; tri->vertex3[2] = p3[2];
 
     ns->mPos[0] = 3;
+
 }

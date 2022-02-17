@@ -21,11 +21,6 @@ typedef double f64;
 
 extern f32 sin_table[];
 extern s16 arctan_table[];
-#define gCosineTable (gSineTable + 0x400)
-
-
-#define sins(x) gSineTable[(u16) (x) >> 4]
-#define coss(x) gCosineTable[(u16) (x) >> 4]
 
 struct Surface {
     /*0x00*/ s16 type;

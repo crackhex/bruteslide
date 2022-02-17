@@ -3,13 +3,11 @@
 #include <math.h>
 #include <stdio.h>
 
-
 f32 sin_table[];
 s16 arctan_table[];
 
-//cos_table = (sin_table + 0x400)
 #define sins(x) sin_table[(u16) (x) >> 4]
-#define coss(x) sin_table[(u16) (x) >> 4 + 0x400]
+#define coss(x) sin_table[(u16) (x + 0x4000) >> 4]
 
 void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     s32 newFacingDYaw;
