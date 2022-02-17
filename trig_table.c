@@ -1,7 +1,6 @@
 #ifndef TRIG_TABLE
 #define TRIG_TABLE
 
-#include "settings.h"
 #include "types.h"
 
 f32 sin_table[5120] = {

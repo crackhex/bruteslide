@@ -21,6 +21,7 @@ typedef double f64;
 
 extern f32 sin_table[];
 extern s16 arctan_table[];
+//extern s16 atan2s(f32 y, f32 x);
 
 struct Surface {
     /*0x00*/ s16 type;

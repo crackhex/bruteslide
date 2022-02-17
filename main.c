@@ -1,8 +1,11 @@
 #include <stdio.h>
-#include "types.h"
+//#include "types.h"
+#include "maths.h"
 //#include "bruteslide.c"
 
 int main() {
+    s16 x = atan2s(1111.10, 1230.10);
+    printf("%i \n", x);//
     int p1[3] = { 6144, 1024, 6144 };
     int p2[3] = { 7168, 2458, 8192 };
     int p3[3] = { 6144, 1024, -1535 };
