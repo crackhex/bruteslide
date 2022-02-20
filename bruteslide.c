@@ -1,8 +1,6 @@
 #include "types.h"
-#include "trig_table.c"
 #include "maths.h"
 #include <math.h>
-#include <stdio.h>
 
 
 void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
@@ -83,7 +81,7 @@ s32 update_sliding(struct MarioState *m, f32 stopSpeed) {
         forward *= 0.5f + 0.5f * m->forwardVel / 100.0f;
     }
 
-    switch (mario_get_floor_class(m)) {
+    /*switch (mario_get_floor_class(m)) {
         case SURFACE_CLASS_VERY_SLIPPERY:
             accel = 10.0f;
             lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.98f;
@@ -103,8 +101,9 @@ s32 update_sliding(struct MarioState *m, f32 stopSpeed) {
             accel = 5.0f;
             lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.92f;
             break;
-    }
-
+    } */
+    accel = 7.0f;
+    lossFactor = m->intendedMag / 32.0f * forward * 0.02f + 0.92f;
     oldSpeed = sqrtf(m->slideVelX * m->slideVelX + m->slideVelZ * m->slideVelZ);
 
     //! This is attempting to use trig derivatives to rotate Mario's speed.
@@ -122,10 +121,10 @@ s32 update_sliding(struct MarioState *m, f32 stopSpeed) {
 
     update_sliding_angle(m, accel, lossFactor);
     //! If floor isn't slope, isn't needed here
-    if (!mario_floor_is_slope(m) && m->forwardVel * m->forwardVel < stopSpeed * stopSpeed) {
+    /*if (!mario_floor_is_slope(m) && m->forwardVel * m->forwardVel < stopSpeed * stopSpeed) {
         mario_set_forward_vel(m, 0.0f);
         stopped = TRUE;
-    }
+    } */
 
     return stopped;
 }
