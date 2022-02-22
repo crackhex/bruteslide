@@ -42,7 +42,6 @@ struct Surface {
     /*0x2C*/ struct Object *object;
 };
 struct MarioState {
-    f32 mPos[3];
     s16 intendedYaw;
     s16 slideYaw;
     f32 forwardVel;
