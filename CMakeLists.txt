@@ -3,4 +3,4 @@ project(bruteslide C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(bruteslide main.c bruteslide.c types.h trig_table.c maths.c maths.h bruteslide.h)
+add_executable(bruteslide main.c bruteslide.c types.h trig_table.c maths.c maths.h bruteslide.h surface.h surface.c)

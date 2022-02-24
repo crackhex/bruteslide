@@ -1,19 +1,6 @@
 #include "maths.h"
 #include <math.h>
 
-int ptInTriangle(f32 p[3], f32 p0[3], f32 p1[3], f32 p2[3]) {
-
-    if ((p0[2] - p[2]) * (p1[0] - p0[0]) - (p0[0] - p[0]) * (p1[2] - p0[2]) < 0) {
-
-        if ((p1[2] - p[2]) * (p2[0] - p1[0]) - (p1[0] - p[0]) * (p2[2] - p1[2]) < 0) {
-
-            if ((p2[2] - p[2]) * (p0[0] - p2[0]) - (p2[0] - p[0]) * (p0[2] - p2[2]) < 0) {
-                return TRUE;
-            }
-        }
-    }
-    return FALSE;
-}
 
 void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     s32 newFacingDYaw;
