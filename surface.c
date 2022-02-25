@@ -99,8 +99,8 @@ static struct Surface *load_surfaces(s16 *vertexData[], s16 triNum) {
 }
 
 
-int ptInTriangle(const f32 p[3], const s16 p0[3], const s16 p1[3], const s16 p2[3]) {
-
+int ptInTriangle(f32 p[3], s16 p0[3], s16 p1[3], s16 p2[3]) {
+    printf("test");
     if ((p0[2] - p[2]) * (p1[0] - p0[0]) - (p0[0] - p[0]) * (p1[2] - p0[2]) < 0) {
 
         if ((p1[2] - p[2]) * (p2[0] - p1[0]) - (p1[0] - p[0]) * (p2[2] - p1[2]) < 0) {

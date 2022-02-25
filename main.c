@@ -3,7 +3,6 @@
 #include "types.h"
 #include "bruteslide.h"
 #include "surface.h"
-//#include "surface.c"
 //! Define the struct
 
 
@@ -26,7 +25,8 @@ int main() {
     //! add tris to lis
     *triList[0] = *tri1; *triList[1] = *tri2;
     //! Defining structs
-    struct MarioState *m = malloc(sizeof(struct MarioState));;
+    struct MarioState *m;
+    m = malloc(sizeof(struct MarioState));
     struct Surface *surface;
     surface = read_surface_data((s16 ***) **triList, triNum);
     printf("hello\n");
@@ -38,21 +38,22 @@ int main() {
 
     //! Testing if mario is in triangle
 
-    int i;
+    int i; int k;
+
     for ( i = 0; i < frames; i++) {
-
-        if (ptInTriangle(mPos, triList[0][0], triList[0][1], triList[0][2]) == 0) {
+        printf("hello\n");
+        printf("%hd\n", triList[1][0][1]);
+        printf("%i", ptInTriangle(mPos, surface->vertex1, surface->vertex2, surface->vertex3));
+        if (ptInTriangle(mPos, surface->vertex1, surface->vertex2, surface->vertex3) == 1) {
             //! Set triangle points as mario's floor
-            printf("%i\n", *triList[0][0]);
 
-            surface->vertex1[0] = tri1[0][0]; surface->vertex1[1] = tri1[0][1]; surface->vertex1[2] = tri1[0][2];
-            surface->vertex2[0] = tri1[1][0]; surface->vertex2[1] = tri1[1][1]; surface->vertex2[2] = tri1[1][2];
-            surface->vertex3[0] = tri1[2][0]; surface->vertex3[1] = tri1[2][1]; surface->vertex3[2] = tri1[2][2];
+
+
         }
         //printf("%i\n", m->slideYaw);
-        update_sliding_angle(m, 2, 2);
+        //update_sliding_angle(m, 2, 2);
 
-        update_sliding(m, 0);
+        //update_sliding(m, 0);
         printf("%f\n", m->pos[0]);
 
     }
