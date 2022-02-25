@@ -11,8 +11,7 @@
 
 s16 tri1[3][3] = { {6144, 1024, 6144}, {7168, 2458, 8192}, {6144, 1024, -1535} };
 s16 tri2[3][3] = { {6144, 1024, 6144}, {7168, 2458, 8192}, {6144, 1024, -1535} };
-s16 *triList[];
-
+s16 *triList[3][3];
 s16 triNum = 0;
 
 //! Number of frames for sliding
@@ -22,13 +21,15 @@ int frames = 10;
 f32 mPos[3] = {6255, 1245, 7833};
 
 
-int main() {
 
-    triList[0] = *tri1; triList[1] = *tri2;
+int main() {
+    //! add tris to lis
+    *triList[0] = *tri1; *triList[1] = *tri2;
     //! Defining structs
     struct MarioState *m = malloc(sizeof(struct MarioState));;
     struct Surface *surface;
-    surface = read_surface_data((s16 **) *triList, triNum);
+    surface = read_surface_data((s16 ***) **triList, triNum);
+    printf("hello\n");
     m->floor = surface;
 
 
@@ -40,12 +41,19 @@ int main() {
     int i;
     for ( i = 0; i < frames; i++) {
 
-        if (ptInTriangle(mPos, &triList[0][0], &triList[0][1], &triList[0][2]) == 1) {
+        if (ptInTriangle(mPos, triList[0][0], triList[0][1], triList[0][2]) == 0) {
             //! Set triangle points as mario's floor
+            printf("%i\n", *triList[0][0]);
+
             surface->vertex1[0] = tri1[0][0]; surface->vertex1[1] = tri1[0][1]; surface->vertex1[2] = tri1[0][2];
             surface->vertex2[0] = tri1[1][0]; surface->vertex2[1] = tri1[1][1]; surface->vertex2[2] = tri1[1][2];
             surface->vertex3[0] = tri1[2][0]; surface->vertex3[1] = tri1[2][1]; surface->vertex3[2] = tri1[2][2];
         }
+        //printf("%i\n", m->slideYaw);
+        update_sliding_angle(m, 2, 2);
+
+        update_sliding(m, 0);
+        printf("%f\n", m->pos[0]);
 
     }
 

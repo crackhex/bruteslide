@@ -1,5 +1,6 @@
 #include "types.h"
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 struct Surface * read_surface_data(s16 vertexData[][3][3], s16 triNum) {
@@ -22,7 +23,7 @@ struct Surface * read_surface_data(s16 vertexData[][3][3], s16 triNum) {
     x3 = vertexData[triNum][2][0];
     y3 = vertexData[triNum][2][1];
     z3 = vertexData[triNum][2][2];
-
+    printf("%i", z3);
     // (v2 - v1) x (v3 - v2)
     nx = (y2 - y1) * (z3 - z2) - (z2 - z1) * (y3 - y2);
     ny = (z2 - z1) * (x3 - x2) - (x2 - x1) * (z3 - z2);

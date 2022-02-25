@@ -63,7 +63,7 @@ void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     }
 }
 
-s32 update_sliding(struct MarioState *m, f32 stopSpeed) {
+struct MarioState* update_sliding(struct MarioState *m, f32 stopSpeed) {
     f32 lossFactor;
     f32 accel;
     f32 oldSpeed;
@@ -125,6 +125,6 @@ s32 update_sliding(struct MarioState *m, f32 stopSpeed) {
         stopped = TRUE;
     } */
 
-    return stopped;
+    return m;
 }
 
