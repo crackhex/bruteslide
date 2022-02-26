@@ -1,14 +1,15 @@
 #include "types.h"
+#include "maths.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-f32 ptInTriangle(const f32 p[3], const s16 p0[3], s16 p1[3], s16 p2[3]) {
-    if (((f32) p0[2] - p[2]) * (f32)(p1[0] -  p0[0]) - ((f32) p0[0] - p[0]) * (f32)(p1[2] - p0[2]) > 0) {
+s16 ptInTriangle(f32 p[3], s16 p0[3], s16 p1[3], s16 p2[3]) {
+    if (( p0[2] - (s16) p[2]) * (p1[0] -  p0[0]) - (p0[0] - (s16) p[0]) * (p1[2] - p0[2]) > 0) {
         //printf("%iewhrje\n", p1[2]);//((p1[2] - p[2]) * (p2[0] - p1[0]) - (p1[0] - p[0]) * (p2[2] - p1[2])));
-        if (((f32) p1[2] - p[2]) * ((f32) p2[0] - (f32) p1[0]) - ((f32) p1[0] - p[0]) * ((f32) p2[2] - (f32) p1[2]) > 0) {
+        if (( p1[2] - (s16) p[2]) * ( p2[0] -  p1[0]) - ( p1[0] - (s16) p[0]) * ( p2[2] -  p1[2]) > 0) {
             //printf("help");
-            if (((f32) p2[2] - p[2]) * ((f32) p0[0] - (f32) p2[0]) - ((f32) p2[0] - p[0]) * ((f32) p0[2] - (f32) p2[2]) > 0) {
+            if ((p2[2] - (s16) p[2]) * ( p0[0] -  p2[0]) - ( p2[0] - (s16) p[0]) * ( p0[2] - p2[2]) > 0) {
                 return TRUE;
             }
         }
@@ -98,12 +99,11 @@ struct Surface * check_mario_surface(f32 mPos[3], s16 vertexData[][3][3], s16 nu
     s16 i;
     //printf("%i\n", numTris);
     struct Surface *surface;
-
     for (i = 0; i < numTris; i++) {
 
         //numSurfaces = sizeof vertexData / sizeof *vertexData;
         surface = read_surface_data(vertexData, 0);
-        if (ptInTriangle(mPos, surface->vertex1, surface->vertex2, surface->vertex3) == 1) {
+        if (ptInTriangle( mPos, surface->vertex1, surface->vertex2, surface->vertex3) == 1) {
             //printf("%i\n", i);
             return surface;
         }
@@ -112,5 +112,17 @@ struct Surface * check_mario_surface(f32 mPos[3], s16 vertexData[][3][3], s16 nu
     return surface;
 
 
+}
+f32 find_floor_height(struct Surface *surf, s32 x, s32 y, s32 z) {
+    f32 nx, ny, nz;
+    f32 oo;
+    f32 height;
+
+    nx = surf->normal.x;
+    ny = surf->normal.y;
+    nz = surf->normal.z;
+    oo = surf->originOffset;
+    height = -((f32) x * nx + nz * (f32) z + oo) / ny;
+    return height;
 }
 

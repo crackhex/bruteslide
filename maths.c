@@ -47,3 +47,18 @@ s16 atan2s(f32 y, f32 x) {
     }
     return ret;
 }
+/// Copy vector 'src' to 'dest'
+void *vec3f_copy(f32 dest[3], f32 src[3]) {
+    dest[0] = src[0];
+    dest[1] = src[1];
+    dest[2] = src[2];
+    return dest; //! warning: function returns address of local variable
+}
+
+/// Set vector 'dest' to (x, y, z)
+void *vec3f_set(f32 dest[3], f32 x, f32 y, f32 z) {
+    dest[0] = x;
+    dest[1] = y;
+    dest[2] = z;
+    return dest; //! warning: function returns address of local variable
+}
