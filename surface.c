@@ -26,6 +26,7 @@ struct Surface * read_surface_data(s16 vertexData[][3][3], s16 triNum) {
     f32 nx, ny, nz;
     f32 mag;
 
+
     x1 = vertexData[triNum][0][0];
     y1 = vertexData[triNum][0][1];
     z1 = vertexData[triNum][0][2];
@@ -95,14 +96,13 @@ struct Surface * read_surface_data(s16 vertexData[][3][3], s16 triNum) {
 
 }
 
-struct Surface * check_mario_surface(f32 mPos[3], s16 vertexData[][3][3], s16 numTris) {
+struct Surface * check_mario_surface(f32 mPos[3], struct Surface *triList[], s16 numTris) {
     s16 i;
     //printf("%i\n", numTris);
     struct Surface *surface;
     for (i = 0; i < numTris; i++) {
-
+        surface = triList[i];
         //numSurfaces = sizeof vertexData / sizeof *vertexData;
-        surface = read_surface_data(vertexData, 0);
         if (ptInTriangle( mPos, surface->vertex1, surface->vertex2, surface->vertex3) == 1) {
             //printf("%i\n", i);
             return surface;
