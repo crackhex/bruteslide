@@ -3,6 +3,15 @@
 #include <math.h>
 #include "surface.h"
 
+void mario_set_forward_vel(struct MarioState *m, f32 forwardVel) {
+    m->forwardVel = forwardVel;
+
+    m->slideVelX = sins(m->faceAngle[1]) * m->forwardVel;
+    m->slideVelZ = coss(m->faceAngle[1]) * m->forwardVel;
+
+    m->vel[0] = (f32) m->slideVelX;
+    m->vel[2] = (f32) m->slideVelZ;
+}
 
 void update_mario_joystick_inputs(struct MarioState *m) {
     struct Controller *controller = m->controller;

@@ -111,7 +111,6 @@ struct Surface * check_mario_surface(f32 mPos[3], s16 vertexData[][3][3], s16 nu
     }
     return surface;
 
-
 }
 f32 find_floor_height(struct Surface *surf, s32 x, s32 y, s32 z) {
     f32 nx, ny, nz;
